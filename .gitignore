@@ -1,0 +1,5 @@
+ledboard.bin
+ledboard.elf
+firmware.s
+__pycache__/
+*.o

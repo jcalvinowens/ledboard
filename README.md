@@ -7,11 +7,11 @@ alphanumeric display easily readable from 50ft outdoors in bright sunlight.
 
 TL;DR:
 
-* [Gerber](prod/v020-GERBER.zip), [BOM](prod/v020-BOM.csv), and [CPL](prod/v020-CPL.csv)
 * [Schematic](prod/v020-SCHEMATIC.pdf)
 * [Layout](prod/v020-LAYOUT.pdf)
 * [Firmware](firmware.c), [Startup Code](start.s), and [Linker Script](link.ld)
 * [Driver](driver.py)
+* [Gerber](prod/v020-GERBER.zip), [BOM](prod/v020-BOM.csv), and [CPL](prod/v020-CPL.csv)
 
 ![](img/font2.jpg)
 ![](img/font1.jpg)

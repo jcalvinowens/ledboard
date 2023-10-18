@@ -19,54 +19,49 @@ import subprocess
 from datetime import datetime, timezone
 import http.client
 
-# List of airports to fetch weather for. Note that the HTTP API requires you to
-# provide a "KILO" prefix, even for airports that don't have one (e.g. C83).
 AIRPORTS = [
-	"KPAO",
-	"KNUQ",
-	"KHWD",
-	"KLVK",
-	"KC83",
-	"KTCY",
-	"KCCR",
-	"KOAK",
-	"KDVO",
-	"KO69",
-	"KAPC",
-	"KSTS",
-	"KHAF",
-	"KSFO",
-	"KRHV",
-	"KSJC",
-	"KE16",
-	"KCVH",
-	"KWVI",
-	"KOAR",
-	"KMRY",
+	"PAO",
+	"NUQ",
+	"HWD",
+	"LVK",
+	"C83",
+	"TCY",
+	"CCR",
+	"OAK",
+	"DVO",
+	"O69",
+	"APC",
+	"STS",
+	"HAF",
+	"SFO",
+	"RHV",
+	"SJC",
+	"E16",
+	"CVH",
+	"WVI",
+	"OAR",
+	"MRY",
 ]
+
+# The HTTP API requires you to provide a "KILO" prefix, even for airports that
+# don't actually have one (like C83)...
+def airports():
+	return ",".join("K" + aid for aid in AIRPORTS)
 
 def get_metars():
 	try:
 		c = http.client.HTTPSConnection("aviationweather.gov")
-		c.request("GET", f"/metar/data?ids={','.join(AIRPORTS)}&format=raw&hours=2&taf=off&layout=off", "", {})
-		metar_out = c.getresponse().read().decode("ascii", "ignore")
+		c.request("GET", f"/cgi-bin/data/metar.php?ids={airports()}&hours=0&format=raw", "", {})
+		metars = c.getresponse().read().decode("ascii", "ignore").splitlines()
 	except:
-		metar_out = ""
+		metars = []
 	finally:
 		c.close()
 
-	metars = []
-	metars.append(" " * 16 + "LOCAL METARS...")
-
+	metarsout = []
+	metarsout.append(" " * 16 + "LOCAL METARS...")
 	now = datetime.now(timezone.utc)
-	for a in AIRPORTS:
-		# Make fun of me if you want, but it works...
-		start = metar_out.find(f">{a}") + 1
-		if start == 0:
-			continue
-
-		end = metar_out.find("</", start)
-		metar = metar_out[start:end]
+	for metar in metars:
 		metarsplit = metar.split(' ')
 
 		# Delete remarks
@@ -74,7 +69,7 @@ def get_metars():
 			del metarsplit[metarsplit.index("RMK"):]
 
 		# Show the airport ID again at the end
-		metarsplit.append(a)
+		metarsplit.append(metarsplit[0])
 
 		# Decode METAR timestamp (DDHHMM)
 		# FIXME: Wrong crossing midnight last day of month
@@ -113,13 +108,12 @@ def get_metars():
 			except:
 				continue
 
-		metar = " ".join(metarsplit)
-		metars.append(metar)
+		metarsout.append(" ".join(metarsplit))
 
-	if len(metars) == 1:
+	if len(metarsout) == 1:
 		return ["HELP I AM BROKEN"]
 
-	return [(" " * 8).join(metars) + " " * 16]
+	return [(" " * 8).join(metarsout) + " " * 16]
 
 def run_client(*args):
 	cmd = ["./driver.py"]

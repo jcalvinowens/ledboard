@@ -16,6 +16,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import argparse
+import random
 import serial
 import sys
 import time
@@ -101,6 +102,22 @@ def write_output_frame(where, frame, last, rowslp, initslp, colslp):
 
 	return now
 
+def write_test_pattern_forever(where):
+	while True:
+		for i in range(NR_ROWS):
+			frame = [[False] * NR_COLS] * NR_ROWS
+			frame[i] = [True] * NR_COLS
+			write_output(where, frame)
+			time.sleep(0.1)
+
+		for i in range(NR_COLS):
+			frame = [[False] * NR_COLS] * NR_ROWS
+			for j in range(NR_ROWS):
+				frame[j][i] = True
+
+			write_output(where, frame)
+			time.sleep(0.05)
+
 def parse_arguments():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--all-on", action="store_true",
@@ -125,6 +142,8 @@ def parse_arguments():
 			    help="Sleep time between each individual row shift")
 	parser.add_argument("--col-shift", type=float, default=0.01, metavar="SECS",
 			    help="Sleep time betwen each column shift")
+	parser.add_argument("--test-pattern", action="store_true",
+			    help="Run test patterns")
 	parser.add_argument("strings", type=str, nargs="*",
 			    help="Strings to write to LEDs (stdin if none)")
 	return parser.parse_args()
@@ -136,6 +155,10 @@ def main():
 	if args.all_on:
 		write_output_frame(where, [[True] * NR_COLS] * NR_ROWS,
 				   None, 0, 0, 0)
+		return 0
+
+	if args.test_pattern:
+		write_test_pattern_forever(where)
 		return 0
 
 	out = build_output_framelist(*args.strings)

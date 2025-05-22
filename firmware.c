@@ -1,20 +1,8 @@
 /*
  * UART 6x64 LED Display Board Firmware
  *
- * Written by Calvin Owens <jcalvinowens@gmail.com>
- *
- * To the extent possible under law, I waive all copyright and related or
- * neighboring rights. You should have received a copy of the CC0 license along
- * with this work. If not, see http://creativecommons.org/publicdomain/zero/1.0
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
- * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
- * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * Chapter references in comments are to STMicro RM0360 (see README for link).
+ * SPDX-License-Identifier: CC-PDDC
+ * Written by Calvin Owens <calvin@wbinvd.org>
  */
 
 #include <stm32f0xx.h>

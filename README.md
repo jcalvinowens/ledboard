@@ -91,11 +91,8 @@ License
 -------
 
 The license for the header files from STMicro can be found at include/LICENSE.
-Everything else is CC0 licensed, see LICENSE in this directory.
+Everything else is in the public domain, see LICENSE in this directory.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
-ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Unless expressly stated otherwise, the person who identified the work makes no
+warranties about the work, and disclaims liability for all uses of the work, to
+the fullest extent permitted by applicable law.
